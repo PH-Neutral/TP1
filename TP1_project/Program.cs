@@ -4,73 +4,71 @@ using System.Collections.Generic;
 namespace TP1_project {
     class Program {
         static void Main(string[] args) {
+            WriteLineColored("** Travail Pratique 1 - Coding/Scripting 1ère Année **\n", ConsoleColor.Cyan);
 
-            Console.WriteLine("<start: Split>");
-            string test1 = "a*65*-*hrt-p**tttr";
-            Console.WriteLine("string: [" + test1 + "]");
-            string[] test1bis = Split('*', test1).ToArray();
-            foreach(string str in test1bis) {
-                Console.WriteLine(str);
-            }
-            Console.WriteLine("<end: Split>\n");
+            // split method
+            WriteLineColored("<Split>");
+            string split = "start*with spaces inside*symbøl€$_^^*420**end";
+            List<string> splitExit = Split('*', split);
+            Console.WriteLine("[" + split + "] => " + ToString(splitExit));
+            WriteLineColored("</Split>\n");
 
-            Console.WriteLine("<start: Invert>");
-            string test2 = "azerty";
-            Console.WriteLine(test2 + ": [" + Invert(test2) + "]");
-            Console.WriteLine("<end: Invert>\n");
+            // invert method
+            WriteLineColored("<Invert>");
+            string invert = "invert this!";
+            string invertExit = Invert(invert);
+            Console.WriteLine("[" + invert + "] => [" + invertExit + "]");
+            WriteLineColored("</Invert>\n");
 
-            Console.WriteLine("<start: InvertWords>");
-            string test3 = "j'écris une phrase";
-            Console.WriteLine(test3 + ": [" + InvertWords(test3) + "]");
-            Console.WriteLine("<end: InvertWords>\n");
+            // invertWords method
+            WriteLineColored("<InvertWords>");
+            string invertWords = "cette phrase va finir inversée";
+            string invertWordsExit = InvertWords(invertWords);
+            Console.WriteLine("[" + invertWords + "] => [" + invertWordsExit + "]");
+            WriteLineColored("</InvertWords>\n");
 
-            Console.WriteLine("<start: InvertSentence>");
-            string test4 = "je m'amuse à programmer en C#";
-            Console.WriteLine(test4 + ": [" + InvertSentence(test4) + "]");
-            Console.WriteLine("<end: InvertSentence>\n");
+            // invertSentence method
+            WriteLineColored("<InvertSentence>");
+            string invertSentence = "je m'amuse à programmer en C#";
+            string invertSentenceExit = InvertSentence(invertSentence);
+            Console.WriteLine("[" + invertSentence + "] => [" + invertSentenceExit + "]");
+            WriteLineColored("</InvertSentence>\n");
 
-            Console.WriteLine("<start: GetIndexSmaller>");
-            int[] test5 = new int[] { -99, 81, 5, 6, -150, 0 };
-            Console.WriteLine("{ 0:-99, 1:81, 2:5, 3:6, 4:-150, 5:0 }" + ": [" + GetIndexSmaller(test5) + "]");
-            Console.WriteLine("<end: GetIndexSmaller>\n");
+            // getIndexSmaller method
+            WriteLineColored("<GetIndexSmaller>");
+            int[] getIndexSmaller = new int[] { -99, 81, 5, 6, -150, 0 };
+            int getIndexSmallerExit = GetIndexSmaller(getIndexSmaller);
+            Console.WriteLine(ToString(getIndexSmaller) + " => [" + getIndexSmallerExit + "]");
+            WriteLineColored("</GetIndexSmaller>\n");
 
-            Console.WriteLine("<start: TriBulles>");
-            int[] test6 = new int[] { -99, 81, 5, 6, -150, 0 };
-            int[] bubbleExit = TriBulles(test6);
-            foreach(int value in bubbleExit) {
-                Console.WriteLine(value);
-            }
-            Console.WriteLine("<end: TriBulles>\n");
+            // triBulles method
+            WriteLineColored("<TriBulles>");
+            int[] bubbles = new int[] { -99, 81, 5, 6, -150, 0 };
+            int[] bubblesExit = TriBulles(bubbles);
+            Console.WriteLine(ToString(bubbles) + " => " + ToString(bubblesExit));
+            WriteLineColored("</TriBulles>\n");
 
-            Console.WriteLine("<start: TriInsertion>");
-            int[] test7 = new int[] { -99, 81, 5, 6, -150, 0 };
-            int[] test7bis = TriInsertion(test7);
-            string test7Result = "{ ";
-            for(int i=0; i < test7bis.Length; i++) {
-                test7Result += test7bis[i] + (i < test7bis.Length - 1 ? ", " : " }");
-            }
-            Console.WriteLine("array: { -99, 81, 5, 6, -150, 0 } => " + test7Result);
-            Console.WriteLine("<end: TriInsertion>\n");
+            // triInsertion method
+            WriteLineColored("<TriInsertion>");
+            int[] insertion = new int[] { -99, 81, 5, 6, -150, 0 };
+            int[] insertionExit = TriInsertion(insertion);
+            Console.WriteLine(ToString(insertion) + " => " + ToString(insertionExit));
+            WriteLineColored("</TriInsertion>\n");
 
-            Console.WriteLine("<start: Fusion>");
-            List<int> test8_1 = new List<int> { 0, 2, 4, 6 };
-            List<int> test8_2 = new List<int> { 1, 3, 5, 7 };
-            List<int> test8_3 = Fusion(test8_1, test8_2);
-            foreach (int value in test8_3)
-            {
-                Console.WriteLine(value);
-            }
-            Console.WriteLine("<end: Fusion>\n");
+            // fusion method
+            WriteLineColored("<Fusion>");
+            List<int> fusion1 = new List<int> { 0, 2, 4, 6 };
+            List<int> fusion2 = new List<int> { 1, 3, 5, 7 };
+            List<int> fusionExit = Fusion(fusion1, fusion2);
+            Console.WriteLine(ToString(fusion1) + " + " + ToString(fusion2) + " => " + ToString(fusionExit));
+            WriteLineColored("</Fusion>\n");
 
-            Console.WriteLine("<start: TriFusion>");
-            List<int> test9 = new List<int> { -99, 81, 5, 6, -150, 0 };
-            List<int> test9bis = TriFusion(test9);
-            string test9Result = "{ ";
-            for(int i = 0; i < test9bis.Count; i++) {
-                test9Result += test9bis[i] + (i < test9bis.Count - 1 ? ", " : " }");
-            }
-            Console.WriteLine("array: { -99, 81, 5, 6, -150, 0 } => " + test9Result);
-            Console.WriteLine("<end: TriFusion>\n");
+            // triFusion method
+            WriteLineColored("<TriFusion>");
+            List<int> sortFusion = new List<int> { -99, 81, 5, 6, -150, 0 };
+            List<int> sortFusionExit = TriFusion(sortFusion);
+            Console.WriteLine(ToString(sortFusion) + " => " + ToString(sortFusionExit));
+            WriteLineColored("</TriFusion>\n");
         }
 
         /** <summary>Renvoie une liste de sous-chaîne de characters où chaque sous-chaîne est comprise entre un séparateur.</summary>**/
@@ -91,7 +89,7 @@ namespace TP1_project {
 
         static string Invert(string str) {
             string result = "";
-            for (int i=str.Length - 1; i >= 0; i--) {
+            for(int i = str.Length - 1; i >= 0; i--) {
                 result += str[i];
             }
             return result;
@@ -100,7 +98,7 @@ namespace TP1_project {
         static string InvertWords(string str) {
             string result = "";
             string[] words = Split(' ', str).ToArray();
-            for (int i=0; i<words.Length; i++) {
+            for(int i = 0; i < words.Length; i++) {
                 result += Invert(words[i]) + (i < words.Length - 1 ? " " : "");
             }
             return result;
@@ -118,8 +116,8 @@ namespace TP1_project {
         static int GetIndexSmaller(int[] array) {
             int index = -1;
             int min = int.MaxValue;
-            for (int i=0;i<array.Length; i++) {
-                if (array[i] < min) {
+            for(int i = 0; i < array.Length; i++) {
+                if(array[i] < min) {
                     min = array[i];
                     index = i;
                 }
@@ -127,31 +125,27 @@ namespace TP1_project {
             return index;
         }
 
-            static int[] TriBulles(int[] array) {
-                bool modified;
-                do {
-                    modified = false;
-                    for(int i = 0; i < array.Length - 1; i++) {
-                        if(array[i] > array[i + 1]) {
-                            int temp = array[i];
-                            array[i] = array[i + 1];
-                            array[i + 1] = temp;
-                            modified = true;
-                        }
+        static int[] TriBulles(int[] array) {
+            bool modified;
+            do {
+                modified = false;
+                for(int i = 0; i < array.Length - 1; i++) {
+                    if(array[i] > array[i + 1]) {
+                        int temp = array[i];
+                        array[i] = array[i + 1];
+                        array[i + 1] = temp;
+                        modified = true;
                     }
-                } while(modified);
+                }
+            } while(modified);
 
-                return array;
-            }
+            return array;
+        }
 
-            static int[] TriInsertion(int[] array) 
-            {
-            for (int i = 1; i < array.Length; i++) 
-                {
-                for (int j = i; j > 0; j--) 
-                    {
-                    if (array[j - 1] > array[j]) 
-                        {
+        static int[] TriInsertion(int[] array) {
+            for(int i = 1; i < array.Length; i++) {
+                for(int j = i; j > 0; j--) {
+                    if(array[j - 1] > array[j]) {
                         int temp = array[j];
                         array[j] = array[j - 1];
                         array[j - 1] = temp;
@@ -182,13 +176,38 @@ namespace TP1_project {
         }
 
         static List<int> TriFusion(List<int> list) {
-            if (list.Count <= 1) { 
-                return list; 
-            }
-            else {
+            if(list.Count <= 1) {
+                return list;
+            } else {
                 int halfCount = list.Count / 2;
                 return Fusion(TriFusion(list.GetRange(0, halfCount)), TriFusion(list.GetRange(halfCount, list.Count - halfCount)));
             }
+        }
+
+        // ----- Testing utilities ----- //
+
+        static void WriteLineColored(string str, ConsoleColor foregroundColor = ConsoleColor.DarkYellow) {
+            Console.ForegroundColor = foregroundColor;
+            Console.WriteLine(str);
+            Console.ResetColor();
+        }
+
+        static string ToString(List<int> intList) => ToString(intList.ToArray());
+        static string ToString(int[] intArray) {
+            string[] strArray = new string[intArray.Length];
+            for(int i = 0; i < intArray.Length; i++) {
+                strArray[i] = "" + intArray[i];
+            }
+            return ToString(strArray);
+        }
+
+        static string ToString(List<string> strList) => ToString(strList.ToArray());
+        static string ToString(string[] array) {
+            string result = "{";
+            for(int i = 0; i < array.Length; i++) {
+                result += '[' + array[i] + ']' + (i < array.Length - 1 ? ", " : "}");
+            }
+            return result;
         }
     }
 }
