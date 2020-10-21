@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace TP1_project {
     class Program {
@@ -35,6 +34,14 @@ namespace TP1_project {
             Console.WriteLine("{ 0:-99, 1:81, 2:5, 3:6, 4:-150, 5:0 }" + ": [" + GetIndexSmaller(test5) + "]");
             Console.WriteLine("<end: GetIndexSmaller>\n");
 
+            Console.WriteLine("<start: TriBulles>");
+            int[] test6 = new int[] { -99, 81, 5, 6, -150, 0 };
+            int[] bubbleExit = TriBulles(test6);
+            foreach(int value in bubbleExit) {
+                Console.WriteLine(value);
+            }
+            Console.WriteLine("<end: TriBulles>\n");
+
             Console.WriteLine("<start: TriInsertion>");
             int[] test7 = new int[] { -99, 81, 5, 6, -150, 0 };
             int[] test7bis = TriInsertion(test7);
@@ -45,14 +52,24 @@ namespace TP1_project {
             Console.WriteLine("array: { -99, 81, 5, 6, -150, 0 } => " + test7Result);
             Console.WriteLine("<end: TriInsertion>\n");
 
-            Console.WriteLine("<start: TriFusion>");
-            List<int> test8 = new List<int> { -99, 81, 5, 6, -150, 0 };
-            List<int> test8bis = TriFusion(test8);
-            string test8Result = "{ ";
-            for(int i = 0; i < test8bis.Count; i++) {
-                test8Result += test8bis[i] + (i < test8bis.Count - 1 ? ", " : " }");
+            Console.WriteLine("<start: Fusion>");
+            List<int> test8_1 = new List<int> { 0, 2, 4, 6 };
+            List<int> test8_2 = new List<int> { 1, 3, 5, 7 };
+            List<int> test8_3 = Fusion(test8_1, test8_2);
+            foreach (int value in test8_3)
+            {
+                Console.WriteLine(value);
             }
-            Console.WriteLine("array: { -99, 81, 5, 6, -150, 0 } => " + test8Result);
+            Console.WriteLine("<end: Fusion>\n");
+
+            Console.WriteLine("<start: TriFusion>");
+            List<int> test9 = new List<int> { -99, 81, 5, 6, -150, 0 };
+            List<int> test9bis = TriFusion(test9);
+            string test9Result = "{ ";
+            for(int i = 0; i < test9bis.Count; i++) {
+                test9Result += test9bis[i] + (i < test9bis.Count - 1 ? ", " : " }");
+            }
+            Console.WriteLine("array: { -99, 81, 5, 6, -150, 0 } => " + test9Result);
             Console.WriteLine("<end: TriFusion>\n");
         }
 
@@ -60,8 +77,8 @@ namespace TP1_project {
         static List<string> Split(char separator, string str) {
             List<string> result = new List<string>();
             string substring = "";
-            for(int i=0;i<str.Length;i++) {
-                if (str[i] == separator) {
+            for(int i = 0; i < str.Length; i++) {
+                if(str[i] == separator) {
                     result.Add(substring);
                     substring = "";
                 } else {
@@ -110,29 +127,56 @@ namespace TP1_project {
             return index;
         }
 
-        static int[] TriInsertion(int[] array) {
-            for (int i=1; i < array.Length; i++) {
-                for(int j = i; j > 0; j--) {
-                    if (array[j-1] > array[j]) {
-                        int temp = array[j-1];
-                        array[j-1] = array[j];
-                        array[j] = temp;
+            static int[] TriBulles(int[] array) {
+                bool modified;
+                do {
+                    modified = false;
+                    for(int i = 0; i < array.Length - 1; i++) {
+                        if(array[i] > array[i + 1]) {
+                            int temp = array[i];
+                            array[i] = array[i + 1];
+                            array[i + 1] = temp;
+                            modified = true;
+                        }
+                    }
+                } while(modified);
+
+                return array;
+            }
+
+            static int[] TriInsertion(int[] array) 
+            {
+            for (int i = 1; i < array.Length; i++) 
+                {
+                for (int j = i; j > 0; j--) 
+                    {
+                    if (array[j - 1] > array[j]) 
+                        {
+                        int temp = array[j];
+                        array[j] = array[j - 1];
+                        array[j - 1] = temp;
                     }
                 }
+
             }
             return array;
         }
 
-        static List<int> Fusion(List<int> list1, List<int> list2) {
-            if (list1.Count == 0) { return list2; }
-            if (list2.Count == 0) { return list1; }
+        static List<int> Fusion(List<int> array1, List<int> array2) {
+            if(array1.Count == 0) {
+                return array2;
+            }
+
+            if(array2.Count == 0) {
+                return array1;
+            }
             List<int> result = new List<int>();
-            if (list1[0] <= list2[0]) {
-                result.Add(list1[0]);
-                result.AddRange( Fusion( list1.GetRange(1, list1.Count - 1), list2 ) );
+            if(array1[0] <= array2[0]) {
+                result.Add(array1[0]);
+                result.AddRange(Fusion(array1.GetRange(1, array1.Count - 1), array2));
             } else {
-                result.Add(list2[0]);
-                result.AddRange(Fusion(list1, list2.GetRange(1, list2.Count - 1)));
+                result.Add(array2[0]);
+                result.AddRange(Fusion(array2.GetRange(1, array2.Count - 1), array1));
             }
             return result;
         }
